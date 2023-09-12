@@ -1,8 +1,13 @@
 pandas
 numpy
-sklearn
+scikit-learn
 xgboost
 zenml
 matplotlib
 seaborn
 scipy
+uvicorn
+fastapi
+pydantic
+lightgbm
+gunicorn

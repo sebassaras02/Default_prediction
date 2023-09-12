@@ -27,13 +27,13 @@ def load_data_to_predict(values : dict) -> pd.DataFrame:
     # load the encoder for each categorical column
     categorical_columns = ['Gender', 'loan_purpose', 'age', 'Region']
     for col in categorical_columns:
-        with open('../models/encoder'+str(col)+'.pkl', 'rb') as file:
+        with open('./models/encoder'+str(col)+'.pkl', 'rb') as file:
             encoder = pickle.load(file)
             df[col] = encoder.transform(df[col])
     # load the scaler for numerical columns ['loan_amount', 'rate_of_interest']
     numerical_columns = ['loan_amount', 'rate_of_interest']
     for col in numerical_columns:
-        with open('../models/scaler'+str(col)+'.pkl', 'rb') as file:
+        with open('./models/scaler'+str(col)+'.pkl', 'rb') as file:
             scaler = pickle.load(file)
             df[col] = scaler.transform(df[[col]])    
     # verify that credit score is int
@@ -46,7 +46,7 @@ def load_data_to_predict(values : dict) -> pd.DataFrame:
 # create a function to evaluate the model
 def evaluate_model(test : pd.DataFrame):
     # load model from pickle
-    with open('../models/model.pkl', 'rb') as file:
+    with open('./models/model.pkl', 'rb') as file:
         model = pickle.load(file)
     # split the data into features and target
     X_test = test
