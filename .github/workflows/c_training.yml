@@ -47,4 +47,4 @@ jobs:
       - name: Push changes
         uses: sebassaras02/Default_prediction@azure
         with:
-          branch: ${{ github.head_ref }}
+          branch: azure
