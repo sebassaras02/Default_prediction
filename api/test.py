@@ -9,6 +9,7 @@ from lightgbm import LGBMClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import pickle
 import logging
+from functions import read_pkl_blob_azure
 
 
 # Configura el logger para mostrar mensajes en la consola
@@ -56,11 +57,13 @@ def evaluate_model(test : pd.DataFrame):
     return y_pred
 
 
-# inp = {'Gender' : 'Male', 'Credit_Score' : 520, 'loan_purpose' : 'p2', 'loan_amount': 1000000 , 
-#        'rate_of_interest': 20 ,'age' : '25-34', 'Region' : 'North'}
+inp = {'Gender' : 'Male', 'Credit_Score' : 520, 'loan_purpose' : 'p2', 'loan_amount': 1000000 , 
+       'rate_of_interest': 20 ,'age' : '25-34', 'Region' : 'North'}
 # PIPELINE TESTING
 def pipeline_testing(val : dict):
     data = load_data_to_predict(val)
     result = evaluate_model(data)
     return result
+
+print(pipeline_testing(inp))
 
