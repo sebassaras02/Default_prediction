@@ -44,6 +44,6 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
             force: true
-            repository: 'sebassaras02/Default_prediction'
+            repository: 'Default_prediction'
             github_token: ${{ secrets.GITHUB_TOKEN }}  
             branch: azure     
