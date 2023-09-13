@@ -1,26 +1,31 @@
 import numpy as np
 import pandas as pd
-from zenml import step, pipeline
 from typing import Tuple
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from functions import phik_matriz
+from functions import read_data, save_file_blob_azure
 from lightgbm import LGBMClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 import pickle
 import logging
+import os
+
 
 # Configura el logger para mostrar mensajes en la consola
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+#enter credentials
+account_name = os.environ.get('SECRET_NAME_BS_AZURE')  
+account_key = os.environ.get('SECRET_KEY_BS_AZURE')  
+
 # STEP 1 OF PIPELINE
 # create a function to process data
 def load_data_to_train() -> Tuple[pd.DataFrame, pd.DataFrame]:
     # load data
-    df = pd.read_csv('../data/Loan_Default.csv')
+    df = read_data(account_name, account_key, 'datos', 'Loan_Default.csv')
     logger.info("Data loaded succesfully") 
     # inpute categorical columns with the mode of the dataframe
     categorical_columns = ['Gender', 'Credit_Score', 'loan_purpose', 'age', 'Status', 'Region']
@@ -84,4 +89,3 @@ def pipeline_training(name : str = 'Loan Default Training'):
     train, test = load_data_to_train()
     train_model(train, test)
     
-pipeline_training()
