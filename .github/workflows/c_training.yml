@@ -41,9 +41,6 @@ jobs:
             git commit -m "Continuos training"
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: sebassaras02/Default_prediction@azure
         with:
-            force: true
-            repository: 'Default_prediction'
-            github_token: ${{ secrets.GITHUB_TOKEN }}  
-            branch: azure     
+          branch: ${{ github.head_ref }}
