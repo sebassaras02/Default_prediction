@@ -70,7 +70,7 @@ def train_model(train : pd.DataFrame, test : pd.DataFrame):
     model.fit(X_train, y_train)
     logger.info("Model trained succesfully")
     # save model as pickle
-    with open('../models/model.pkl', 'wb') as file:
+    with open('model.pkl', 'wb') as file:
         pickle.dump(model, file)
         logging.debug("Model saved succesfully")
     # save the metrics as json file
