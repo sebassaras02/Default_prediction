@@ -4,10 +4,6 @@ from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPerm
 from datetime import datetime, timedelta
 import urllib
 
-#enter credentials
-account_name = 'datadefault'
-account_key = 'xQwhWpkA36o5tLQorGu/2tUQ5EmOsgBQbCDeJIjBh4lZd4yhTeJEDXi3WcVyZASyh67NxcRiJard+AStEj9IkA=='
-
 # create a function to read pkl files from blob storage
 def read_pkl_blob_azure(account_name, account_key, container_name, file_name):
     #create a client to interact with blob storage
