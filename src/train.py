@@ -89,3 +89,4 @@ def pipeline_training(name : str = 'Loan Default Training'):
     train, test = load_data_to_train()
     train_model(train, test)
     
+pipeline_training()
