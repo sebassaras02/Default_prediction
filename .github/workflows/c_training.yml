@@ -24,6 +24,7 @@ jobs:
       - name: Delete previous models
         run: |
           rm -rf models/*
+          rm -rf metrics/*
       # run the python script
       - name: Run python script
         env:
@@ -36,6 +37,7 @@ jobs:
           # run the script
           python src/train.py
           mv src/*.pkl models/
+          mv src/*.json models/
 
       # commit the changes
       - name: Commit files

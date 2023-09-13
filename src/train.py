@@ -80,7 +80,7 @@ def train_model(train : pd.DataFrame, test : pd.DataFrame):
                'precision': precision_score(y_test, y_pred, pos_label = 1),
                'recall' : recall_score(y_test, y_pred, pos_label = 1),
                'f1': f1_score(y_test, y_pred, pos_label = 1)}
-    with open('../metrics/metrics_retraining.json', 'w') as file:
+    with open('metrics_retraining.json', 'w') as file:
         json.dump(metrics, file)
     logger.info("Metrics saved succesfully")
         
