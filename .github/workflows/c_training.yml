@@ -35,11 +35,15 @@ jobs:
       # commit the changes
       - name: Commit files
         run: |
-            git config --local user.email "sebitas.alejo@hotmail.com"
-            git config --local user.name "github-actions[bot]"
-            git commit -a -m "Continuos training"
+            git config --local user.email "actions@github.com"
+            git config --local user.name "GitHub Actions"
+            git add .
+            git commit -m "Continuos training"
+
       - name: Push changes
-        uses: sebassaras02/Default_prediction@azure
+        uses: ad-m/github-push-action@v0.6.0
         with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: azure
+            force: true
+            repository: 'sebassaras02/Default_prediction'
+            github_token: ${{ secrets.GITHUB_TOKEN }}  
+            branch: azure     
