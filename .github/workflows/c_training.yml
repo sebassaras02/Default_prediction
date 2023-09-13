@@ -47,9 +47,3 @@ jobs:
             git add .
             git commit -m "Continuos training"
             git push
-
-      # - name: Push changes
-      #   uses: sebassaras02/Default_prediction@azure
-      #   with:
-      #     force: true
-      #     tags: true
