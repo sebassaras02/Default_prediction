@@ -43,10 +43,10 @@ jobs:
             git config --local user.name "GitHub Actions"
             git add .
             git commit -m "Continuos training"
+            git push
 
-      - name: Push changes
-        uses: sebassaras02/Default_prediction@azure
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          force: true
+      # - name: Push changes
+      #   uses: sebassaras02/Default_prediction@azure
+      #   with:
+      #     force: true
+      #     tags: true
