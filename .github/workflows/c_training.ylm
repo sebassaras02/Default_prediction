@@ -5,8 +5,7 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 # specify the event that will trigger the workflow
 on:
     push:
-        branches:
-            - azure 
+        branches: ["azure"]
     schedule:
         - cron: '0 0 1 * *'
 
