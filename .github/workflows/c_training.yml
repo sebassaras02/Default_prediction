@@ -1,19 +1,19 @@
-# workflow for continuos training of the model
-name: Continuos Training
+# workflow for continuous training of the model
+name: Continuous Training
+
 # define the name for the runner
-run-name: ${{ github.actor }} is learning GitHub Actions
-# specify the event that will trigger the workflow
 on:
-    push:
-        branches: ["azure"]
-    schedule:
-        - cron: '0 0 1 * *'
+  push:
+    branches:
+      - azure
+  schedule:
+    - cron: '0 0 1 * *'
 
 # specify to run in the latest ubuntu
 jobs:
 
-    # define the job name
-    build:
+  # define the job name
+  build:
 
     # specify the type of runner
     runs-on: ubuntu-latest
@@ -21,24 +21,25 @@ jobs:
     # define the steps to run
     steps:
 
-        # checkout the repository
-        - uses: actions/checkout@v3
+      # checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-        # run the python script
-        - name: Run python script
-            env:
-            # set the environment variables
-            SECRET_KEY_BS_AZURE: ${{ secrets.SECRET_KEY_BS_AZURE }}
-            SECRET_NAME_BS_AZURE: ${{ secrets.SECRET_NAME_BS_AZURE }}            
-            run: |
-            # install requeriments
-            pip install -r requirements.txt
-            # run the script
-            python /src/train.py
+      # run the python script
+      - name: Run python script
+        env:
+          # set the environment variables
+          SECRET_KEY_BS_AZURE: ${{ secrets.SECRET_KEY_BS_AZURE }}
+          SECRET_NAME_BS_AZURE: ${{ secrets.SECRET_NAME_BS_AZURE }}
+        run: |
+          # install requirements
+          pip install -r requirements.txt
+          # run the script
+          python src/train.py
 
-        # commit the changes
-        - name: Commit files
-            uses: actions-go/push@azure
-                with:
-                commit-message: 'Continous training of the model'
-                remote: origin
+      # commit the changes
+      - name: Commit files
+        uses: azure/actions/push@v1
+        with:
+          branch: azure
+          commit-message: 'Continuous training of the model'
