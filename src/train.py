@@ -43,13 +43,13 @@ def load_data_to_train() -> Tuple[pd.DataFrame, pd.DataFrame]:
     for col in categorical_columns:
         encoder = LabelEncoder()
         df_f[col] = encoder.fit_transform(df_f[col])  
-        with open('../models/encoder'+str(col)+'.pkl', 'wb') as file:
+        with open('encoder'+str(col)+'.pkl', 'wb') as file:
             pickle.dump(encoder, file)
     # apply a min-max scaler to the numerical columns
     for col in numerical_columns:
         scaler = MinMaxScaler()
         df_f[col] = scaler.fit_transform(df_f[[col]])  
-        with open('../models/scaler'+str(col)+'.pkl', 'wb') as file:
+        with open('scaler'+str(col)+'.pkl', 'wb') as file:
             pickle.dump(scaler, file)
     # split data into train and test
     train, test = train_test_split(df_f, test_size = 0.3, random_state = 99)
