@@ -39,7 +39,7 @@ jobs:
             git config --local user.name "github-actions[bot]"
             git commit -a -m "Continuos training"
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: sebassaras02/Default_prediction@azure
         with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             branch: azure
