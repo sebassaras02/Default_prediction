@@ -20,6 +20,10 @@ jobs:
       # checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
+      # delete previous models
+      - name: Delete previous models
+        run: |
+          rm -rf models/*
       # run the python script
       - name: Run python script
         env:
