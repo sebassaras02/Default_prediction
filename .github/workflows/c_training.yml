@@ -11,20 +11,15 @@ on:
 
 # specify to run in the latest ubuntu
 jobs:
-
   # define the job name
   build:
-
     # specify the type of runner
     runs-on: ubuntu-latest
-
     # define the steps to run
     steps:
-
       # checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v2
-
       # run the python script
       - name: Run python script
         env:
