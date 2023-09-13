@@ -38,7 +38,7 @@ jobs:
             git config --local user.email "sebitas.alejo@hotmail.com"
             git config --local user.name "github-actions[bot]"
             git commit -a -m "Continuos training"
-        - name: Push changes
+      - name: Push changes
         uses: ad-m/github-push-action@azure
         with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
