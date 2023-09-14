@@ -36,15 +36,23 @@ def read_data(account_name, account_key, container_name, file_name):
 
 
 # create a function to save files into azure bucker
-def save_file_blob_azure(account_name, account_key, object_to_save, name_object):
+def save_file_blob_azure(account_name, account_key, object_to_save, name_object, container_name):
     # Conecta con la cuenta de Azure Blob Storage
     blob_service_client = BlobServiceClient(account_url=f"https://{account_name}.blob.core.windows.net", credential=account_key)
-    container_name = 'models'
+    container_name = container_name
     # Accede o crea un contenedor si no existe
     container_client = blob_service_client.get_container_client(container_name)
-    # Serializar el objeto a pickle
-    contenido_pickle = pickle.dumps(object_to_save)
-    blob_name = name_object
-    # Sube el objeto pickle al contenedor
-    blob_client = container_client.get_blob_client(blob_name)
-    blob_client.upload_blob(contenido_pickle, overwrite=True)
+    if "json" in name_object:
+        # Serializar el objeto a pickle
+        contenido_pickle = json.dumps(object_to_save)
+        blob_name = name_object
+        # Sube el objeto pickle al contenedor
+        blob_client = container_client.get_blob_client(blob_name)
+        blob_client.upload_blob(contenido_pickle, overwrite=True)
+    else:
+        # Serializar el objeto a pickle
+        contenido_pickle = pickle.dumps(object_to_save)
+        blob_name = name_object
+        # Sube el objeto pickle al contenedor
+        blob_client = container_client.get_blob_client(blob_name)
+        blob_client.upload_blob(contenido_pickle, overwrite=True)

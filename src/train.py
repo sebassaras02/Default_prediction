@@ -43,16 +43,22 @@ def load_data_to_train() -> Tuple[pd.DataFrame, pd.DataFrame]:
     for col in categorical_columns:
         encoder = LabelEncoder()
         df_f[col] = encoder.fit_transform(df_f[col])  
-        with open('encoder'+str(col)+'.pkl', 'wb') as file:
-            pickle.dump(encoder, file)
+        # save the encoder as pickle in blob storage
+        save_file_blob_azure(account_name, account_key, encoder, 'encoder'+str(col)+'.pkl', 'models')
+        # this lines of code are comment because the encoders are already saved in blob storage
+        # with open('encoder'+str(col)+'.pkl', 'wb') as file:
+        #     pickle.dump(encoder, file)
     # apply a min-max scaler to the numerical columns
     for col in numerical_columns:
         scaler = MinMaxScaler()
         df_f[col] = scaler.fit_transform(df_f[[col]])  
-        with open('scaler'+str(col)+'.pkl', 'wb') as file:
-            pickle.dump(scaler, file)
+        # save the scaler as pickle in blob storage
+        save_file_blob_azure(account_name, account_key, scaler, 'scaler'+str(col)+'.pkl', 'models')
+        # comment this lines of code because the scalers are already saved in blob storage
+        # with open('scaler'+str(col)+'.pkl', 'wb') as file:
+        #     pickle.dump(scaler, file)
     # split data into train and test
-    train, test = train_test_split(df_f, test_size = 0.3    )
+    train, test = train_test_split(df_f, test_size = 0.3)
     logger.info("Data processed succesfully")
     return train, test
 
@@ -69,10 +75,12 @@ def train_model(train : pd.DataFrame, test : pd.DataFrame):
     model = LGBMClassifier(n_estimators = 100, random_state = 99)
     model.fit(X_train, y_train)
     logger.info("Model trained succesfully")
+    # save model in blob storage
+    save_file_blob_azure(account_name, account_key, model, 'model.pkl', 'models')
     # save model as pickle
-    with open('model.pkl', 'wb') as file:
-        pickle.dump(model, file)
-        logging.debug("Model saved succesfully")
+    # with open('model.pkl', 'wb') as file:
+    #     pickle.dump(model, file)
+    logging.debug("Model saved succesfully")
     # save the metrics as json file
     import json
     y_pred = model.predict(X_test)
@@ -80,8 +88,11 @@ def train_model(train : pd.DataFrame, test : pd.DataFrame):
                'precision': precision_score(y_test, y_pred, pos_label = 1),
                'recall' : recall_score(y_test, y_pred, pos_label = 1),
                'f1': f1_score(y_test, y_pred, pos_label = 1)}
-    with open('metrics_retraining.json', 'w') as file:
-        json.dump(metrics, file)
+    # save the metrics in blob storage
+    save_file_blob_azure(account_name, account_key, metrics, 'metrics_retraining.json', 'metrics')
+    # comment this lines of code because the metrics are already saved in blob storage
+    # with open('metrics_retraining.json', 'w') as file:
+    #     json.dump(metrics, file)
     logger.info("Metrics saved succesfully")
         
 # CREATE PIPELINE
