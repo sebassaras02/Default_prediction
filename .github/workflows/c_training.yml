@@ -20,12 +20,7 @@ jobs:
       # checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-      # delete previous models
-      - name: Delete previous models
-        run: |
-          rm -rf models/*
-          rm -rf metrics/*
-      # run the python script
+      # set up python  
       - name: Run python script
         env:
           # set the environment variables
@@ -36,16 +31,3 @@ jobs:
           pip install -r requirements.txt
           # run the script
           python src/train.py
-          # move the pkl file to the models folder
-          mv *.pkl models/
-          # move the metrics file to the metrics folder
-          mv metrics_retraining.json metrics/
-
-      # commit the changes
-      - name: Commit files
-        run: |
-            git config --local user.email "actions@github.com"
-            git config --local user.name "GitHub Actions"
-            git add .
-            git commit -m "Continuos training"
-            git push
