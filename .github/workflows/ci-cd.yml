@@ -3,7 +3,7 @@
 name: Continuos Deployment
 on: 
     workflow_run:
-        workflows: ["c_ttaining.yml"]
+        workflows: ["c_training.yml"]
         types:
           - completed
 
