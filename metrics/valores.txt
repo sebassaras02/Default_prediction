@@ -1,0 +1,7 @@
+Gender : {'Joint', 'Female', 'Sex Not Available', 'Male'}
+Credit score: Valor de 500 a 900
+loan_purpose : {'p1', 'p3', 'p4', 'p2'}
+loan_amount : {ints}
+rate_of_interest : {float}
+age : {'35-44', '25-34', '55-64', '65-74', '>74', '45-54', '<25'}
+Region: {'central', 'south', 'North-East', 'North'}
