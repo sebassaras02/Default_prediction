@@ -31,3 +31,4 @@ jobs:
                 push: true
                 tags: modeloml.azurecr.io/model-api:${{ github.sha }}
                 file: Dockerfile
+            # verificar todo el proceso
