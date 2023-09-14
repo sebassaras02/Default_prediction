@@ -1,0 +1,33 @@
+# create a workflow to create the docker image and push it to azure container registry
+# the workflow will be triggered when the c_training.yml file is executed
+name: Continuos Deployment
+on: 
+    workflow_run:
+        workflows: ["c_ttaining.yml"]
+        types:
+          - completed
+
+# definir el job a ejecutar
+jobs:
+    build:
+        # define where the job will run
+        runs-on: ubuntu-latest
+        # define the steps to execute
+        steps:
+            # checkout the repository
+            - name: Checkout
+              uses: actions/checkout@v3
+            # login to azure container registry
+            - name: Docker Login
+              uses: azure/docker-login@v1
+              with:
+                login-server: ${{ secrets.SECRET_LOGIN_CR_AZURE }}
+                username: ${{ secrets.SECRET_NAME_CR_AZURE }}
+                password: ${{ secrets.SECRET_KEY_CR_AZURE }}
+         
+            - name: Build the frontend image and push it to ACR
+              uses: docker/build-push-action@v2
+              with:
+                push: true
+                tags: modeloml.azurecr.io/model-api:${{ github.sha }}
+                file: Dockerfile
