@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPermissions
 import pandas as pd
 import pickle
+import json
 
 # create a function to make phik matrix
 def phik_matriz(df : pd.DataFrame) -> list:
