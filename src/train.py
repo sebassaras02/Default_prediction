@@ -43,13 +43,13 @@ def load_data_to_train() -> Tuple[pd.DataFrame, pd.DataFrame]:
     for col in categorical_columns:
         encoder = LabelEncoder()
         df_f[col] = encoder.fit_transform(df_f[col])  
-        with open('models/encoder'+str(col)+'.pkl', 'wb') as file:
+        with open('/models/encoder'+str(col)+'.pkl', 'wb') as file:
             pickle.dump(encoder, file)
     # apply a min-max scaler to the numerical columns
     for col in numerical_columns:
         scaler = MinMaxScaler()
         df_f[col] = scaler.fit_transform(df_f[[col]])  
-        with open('models/scaler'+str(col)+'.pkl', 'wb') as file:
+        with open('/models/scaler'+str(col)+'.pkl', 'wb') as file:
             pickle.dump(scaler, file)
     # split data into train and test
     train, test = train_test_split(df_f, test_size = 0.3, random_state = 99)
@@ -70,7 +70,7 @@ def train_model(train : pd.DataFrame, test : pd.DataFrame):
     model.fit(X_train, y_train)
     logger.info("Model trained succesfully")
     # save model as pickle
-    with open('models/model.pkl', 'wb') as file:
+    with open('/models/model.pkl', 'wb') as file:
         pickle.dump(model, file)
         logging.debug("Model saved succesfully")
     # save the metrics as json file
@@ -80,7 +80,7 @@ def train_model(train : pd.DataFrame, test : pd.DataFrame):
                'precision': precision_score(y_test, y_pred, pos_label = 1),
                'recall' : recall_score(y_test, y_pred, pos_label = 1),
                'f1': f1_score(y_test, y_pred, pos_label = 1)}
-    with open('metrics/metrics_retraining.json', 'w') as file:
+    with open('/metrics/metrics_retraining.json', 'w') as file:
         json.dump(metrics, file)
     logger.info("Metrics saved succesfully")
         
