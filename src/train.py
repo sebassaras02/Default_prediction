@@ -52,7 +52,7 @@ def load_data_to_train() -> Tuple[pd.DataFrame, pd.DataFrame]:
         with open('scaler'+str(col)+'.pkl', 'wb') as file:
             pickle.dump(scaler, file)
     # split data into train and test
-    train, test = train_test_split(df_f, test_size = 0.3, random_state = 99)
+    train, test = train_test_split(df_f, test_size = 0.3    )
     logger.info("Data processed succesfully")
     return train, test
 
