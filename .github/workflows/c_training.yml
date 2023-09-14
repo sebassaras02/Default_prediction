@@ -23,8 +23,6 @@ jobs:
       # delete previous models
       - name: Delete previous models
         run: |
-          rm -rf models/*
-          rm -rf metrics/*
       # run the python script
       - name: Run python script
         env:
