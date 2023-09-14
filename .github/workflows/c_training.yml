@@ -23,6 +23,8 @@ jobs:
       # delete previous models
       - name: Delete previous models
         run: |
+          rm -rf models/*
+          rm -rf metrics/*
       # run the python script
       - name: Run python script
         env:
@@ -34,6 +36,10 @@ jobs:
           pip install -r requirements.txt
           # run the script
           python src/train.py
+          # move the pkl file to the models folder
+          mv *.pkl models/
+          # move the metrics file to the metrics folder
+          mv metrics.json metrics/
 
       # commit the changes
       - name: Commit files
