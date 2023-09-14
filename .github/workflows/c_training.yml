@@ -39,7 +39,7 @@ jobs:
           # move the pkl file to the models folder
           mv *.pkl models/
           # move the metrics file to the metrics folder
-          mv metrics.json metrics/
+          mv metrics_retraining.json metrics/
 
       # commit the changes
       - name: Commit files
