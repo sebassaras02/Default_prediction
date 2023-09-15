@@ -21,9 +21,6 @@ RUN python get_models_azure.py
 # copy the api code
 COPY api/ ./api
 
-# copy the models trained
-COPY models/ ./models
-
 # copy initializer file
 COPY initializer.sh .
 
