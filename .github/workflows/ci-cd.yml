@@ -27,7 +27,9 @@ jobs:
                 pip install -r requirements_azure.txt
                 python get_models_azure.py
             - name: Copy models to Docker context
-              run: cp -r models/* .              
+              run: cp -r models/* .   
+            - name: List files in Docker context
+              run: ls -l                       
             # login to azure container registry
             - name: Docker Login
               uses: azure/docker-login@v1
