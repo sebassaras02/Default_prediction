@@ -24,7 +24,3 @@ def read_pkl_blob_azure(account_name, account_key, container_name, file_name):
     with urllib.request.urlopen(sas_url) as url:
         data = pickle.loads(url.read())
     return data
-
-a = read_pkl_blob_azure(account_name, account_key, 'models', 'encoderRegion.pkl')
-if a:
-    print("Executed succesfully")
