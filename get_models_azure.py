@@ -3,6 +3,11 @@
 import pickle
 from azure.storage.blob import BlobServiceClient   
 import os
+import logging
+
+# Configura el logger para mostrar mensajes en la consola
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def read_pkl_blob_azure(account_name, account_key, container_name):
     #create a client to interact with blob storage
@@ -10,9 +15,8 @@ def read_pkl_blob_azure(account_name, account_key, container_name):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)    
     #use the client to connect to the container
     container_client = blob_service_client.get_container_client(container_name)
-    # create the models folder if it doesn't exist
-    if not os.path.exists('models'):
-        os.makedirs('models')
+    # create the models folder
+    os.makedirs('models', exist_ok=True)
     # iterate over the blobs in the container
     for blob_i in container_client.list_blobs():
         # download the file pkl file and save in a models folder

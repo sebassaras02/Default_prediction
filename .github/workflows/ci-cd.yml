@@ -24,8 +24,10 @@ jobs:
                 SECRET_KEY_BS_AZURE: ${{ secrets.SECRET_KEY_BS_AZURE }}
                 SECRET_NAME_BS_AZURE: ${{ secrets.SECRET_NAME_BS_AZURE }}
               run: |
-                pip install -r requirements.txt
+                pip install -r requirements_azure.txt
                 python get_models_azure.py
+            - name: Copy models to Docker context
+              run: cp -r models/* .              
             # login to azure container registry
             - name: Docker Login
               uses: azure/docker-login@v1
