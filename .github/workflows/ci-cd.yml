@@ -47,6 +47,6 @@ jobs:
               uses: docker/build-push-action@v5
               with:
                 push: true
-                tags: modeloml.azurecr.io/model-api:${{ github.sha }}
+                tags: modeloml.azurecr.io/model-api:v1
                 file: Dockerfile
             # verificar todo el proceso
