@@ -13,13 +13,11 @@ RUN pip install --upgrade pip
 # install the requirements
 RUN pip install -r requirements.txt
 
-# copy get_models_azure.py to download the pkl models from azure
-COPY get_models_azure.py .
-# run the python script to download the models
-RUN python get_models_azure.py
-
 # copy the api code
 COPY api/ ./api
+
+# copy the models trained
+COPY models/ ./models
 
 # copy initializer file
 COPY initializer.sh .
