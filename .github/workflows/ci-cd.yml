@@ -26,10 +26,15 @@ jobs:
               run: |
                 pip install -r requirements_azure.txt
                 python get_models_azure.py
-            - name: Copy models to Docker context
-              run: cp -r models/* .   
-            - name: List files in Docker context
-              run: ls                        
+            # So now you can use Actions' own caching!
+            - name: Cache Docker layers
+              uses: actions/cache@v2
+              with:
+                path: /tmp/.buildx-cache
+                key: ${{ runner.os }}-buildx-${{ github.sha }}
+                restore-keys: |
+                  ${{ runner.os }}-buildx-
+
             # login to azure container registry
             - name: Docker Login
               uses: azure/docker-login@v1
