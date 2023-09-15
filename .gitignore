@@ -1,5 +1,3 @@
 # ignore the pycache folder
 __pycache__
 key_bucket.json
-data/
-models/
