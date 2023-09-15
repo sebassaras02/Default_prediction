@@ -13,6 +13,9 @@ RUN pip install --upgrade pip
 # install the requirements
 RUN pip install -r requirements.txt
 
+# run the python script to download the models
+RUN python get_models_azure.py
+
 # copy the api code
 COPY api/ ./api
 
