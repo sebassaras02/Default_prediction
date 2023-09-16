@@ -9,7 +9,6 @@ from lightgbm import LGBMClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import pickle
 import logging
-from functions import read_pkl_blob_azure
 
 
 # Configura el logger para mostrar mensajes en la consola
