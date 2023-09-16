@@ -14,3 +14,4 @@ gunicorn
 phik
 azure-storage-blob 
 azure-identity
+unicorn

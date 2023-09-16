@@ -22,6 +22,8 @@ COPY models/ ./models
 # copy initializer file
 COPY initializer.sh .
 
+RUN chmod +x initializer.sh
+
 # define the point of entry
 EXPOSE 8000
 ENTRYPOINT ["./initializer.sh"]
